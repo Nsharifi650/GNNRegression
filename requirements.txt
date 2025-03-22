@@ -1,0 +1,7 @@
+pandas
+torch
+torch-geometric
+scikit-learn
+pydantic
+pyyaml
+plotly

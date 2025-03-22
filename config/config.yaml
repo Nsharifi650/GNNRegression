@@ -1,0 +1,41 @@
+data:
+  raw_csv_path: "data/raw/Sensordata.csv"
+  processed_graph_path: "data/processed/graphs_dataset.pt"
+
+graph:
+  nodes_order:
+    - Sensor1
+    - Sensor2
+    - Sensor3
+    - Sensor4
+    - Sensor5
+    - Sensor6
+    - Sensor7
+    - Sensor8
+
+  edge_list:
+    - [0, 1]
+    - [1, 2]
+    - [2, 3]
+    - [2, 4]
+    - [3, 5]
+    - [3, 6]
+    - [6, 2]
+    - [2, 7]
+
+model:
+  hidden_dim1: 16
+  hidden_dim2: 8
+  dropout: 0.1
+
+training:
+  epochs: 2
+  batch_size: 8
+  lr: 0.0001
+  weight_decay: 1e-6
+  pretrained: False
+  model_path: "model_weights/GNNmodel_state_dict_Batched_new2.pth"
+  save_path: "model_weights/trained_model.pth"
+
+evaluation:
+  target_node_indices: [1, 2, 3]

@@ -26,10 +26,6 @@ class ModelConfig(BaseModel):
     hidden_dim2: int
     dropout: float
 
-class Config(BaseModel):
-    data: DataPaths
-    graph: GraphConfig
-    model: ModelConfig
 
 class TrainingConfig(BaseModel):
     epochs: int
@@ -39,12 +35,6 @@ class TrainingConfig(BaseModel):
     pretrained: bool
     model_path: str
     save_path: str
-
-class Config(BaseModel):
-    data: DataPaths
-    graph: GraphConfig
-    model: ModelConfig
-    training: TrainingConfig
 
 
 class EvalConfig(BaseModel):

@@ -12,9 +12,6 @@ class DataPaths(BaseModel):
     raw_csv_path: str
     processed_graph_path: str
 
-class Config(BaseModel):
-    data: DataPaths
-    graph: GraphConfig
 
 def load_config(path: str) -> Config:
     with open(path, 'r') as file:

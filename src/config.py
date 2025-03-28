@@ -15,13 +15,6 @@ class DataPaths(BaseModel):
     processed_graph_path: str
 
 
-
-def load_config(path: str) -> Config:
-    with open(path, "r") as file:
-        config_dict = yaml.safe_load(file)
-    return Config(**config_dict)
-
-
 class ModelConfig(BaseModel):
     hidden_dim1: int
     hidden_dim2: int
@@ -48,3 +41,9 @@ class Config(BaseModel):
     model: ModelConfig
     training: TrainingConfig
     evaluation: Optional[EvalConfig] = None
+
+
+def load_config(path: str) -> Config:
+    with open(path, "r") as file:
+        config_dict = yaml.safe_load(file)
+    return Config(**config_dict)

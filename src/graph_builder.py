@@ -20,7 +20,9 @@ def build_edge_index(edge_list: List[List[int]]) -> torch.Tensor:
     return undirected_edges
 
 
-def create_graphs(df_scaled: pd.DataFrame, nodes_order: List[str], edge_index: torch.Tensor) -> List[Data]:
+def create_graphs(
+    df_scaled: pd.DataFrame, nodes_order: List[str], edge_index: torch.Tensor
+) -> List[Data]:
     graphs = []
 
     for _, row in df_scaled.iterrows():

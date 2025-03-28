@@ -11,19 +11,25 @@ def main():
     config = load_config("config/config.yaml")
     process_and_save_graphs(config)
     graphs = torch.load(config.data.processed_graph_path, weights_only=False)
-    train_size = 1 - config.training.test_size if hasattr(config.training, "test_size") else 0.95
-    train_graphs, test_graphs = train_test_split(graphs, test_size=1 - train_size, random_state=42)
+    train_size = (
+        1 - config.training.test_size if hasattr(config.training, "test_size") else 0.95
+    )
+    train_graphs, test_graphs = train_test_split(
+        graphs, test_size=1 - train_size, random_state=42
+    )
     run_training_pipeline(config, graphs_path=config.data.processed_graph_path)
 
     model = GNNModel(
         num_node_features=1,
         hidden_dim1=config.model.hidden_dim1,
         hidden_dim2=config.model.hidden_dim2,
-        dropout=config.model.dropout
+        dropout=config.model.dropout,
     )
     model.load_state_dict(torch.load(config.training.save_path))
 
-    target_node_indices = config.evaluation.target_node_indices if config.evaluation else [1, 2, 3]
+    target_node_indices = (
+        config.evaluation.target_node_indices if config.evaluation else [1, 2, 3]
+    )
     actual, pred = evaluate_model(model, test_graphs, target_node_indices)
 
     plot_predictions(actual, pred)

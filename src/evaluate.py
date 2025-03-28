@@ -6,7 +6,9 @@ from torch_geometric.data import Data
 import plotly.graph_objects as go
 
 
-def evaluate_model(model: GNNModel, test_graphs: List[Data], target_node_indices: List[int]) -> Tuple[List[float], List[float]]:
+def evaluate_model(
+    model: GNNModel, test_graphs: List[Data], target_node_indices: List[int]
+) -> Tuple[List[float], List[float]]:
     model.eval()
     test_loader = DataLoader(test_graphs, batch_size=1, shuffle=False)
 
@@ -32,34 +34,34 @@ def plot_predictions(actual: List[float], pred: List[float]):
     scatter_trace = go.Scatter(
         x=actual,
         y=pred,
-        mode='markers',
+        mode="markers",
         marker=dict(
             size=10,
             opacity=0.5,
-            color='rgba(255,255,255,0)',
+            color="rgba(255,255,255,0)",
             line=dict(
                 width=2,
-                color='rgba(152, 0, 0, .8)',
-            )
+                color="rgba(152, 0, 0, .8)",
+            ),
         ),
-        name='Actual vs Predicted'
+        name="Actual vs Predicted",
     )
 
     line_trace = go.Scatter(
         x=[min(actual), max(actual)],
         y=[min(actual), max(actual)],
-        mode='lines',
-        marker=dict(color='blue'),
-        name='Perfect Prediction'
+        mode="lines",
+        marker=dict(color="blue"),
+        name="Perfect Prediction",
     )
 
     layout = dict(
-        title='Actual vs Predicted Values',
-        xaxis=dict(title='Actual Values'),
-        yaxis=dict(title='Predicted Values'),
+        title="Actual vs Predicted Values",
+        xaxis=dict(title="Actual Values"),
+        yaxis=dict(title="Predicted Values"),
         autosize=False,
         width=800,
-        height=600
+        height=600,
     )
 
     fig = go.Figure(data=[scatter_trace, line_trace], layout=layout)

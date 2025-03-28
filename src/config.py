@@ -15,10 +15,6 @@ class DataPaths(BaseModel):
     processed_graph_path: str
 
 
-class Config(BaseModel):
-    data: DataPaths
-    graph: GraphConfig
-
 
 def load_config(path: str) -> Config:
     with open(path, "r") as file:
@@ -32,12 +28,6 @@ class ModelConfig(BaseModel):
     dropout: float
 
 
-class Config(BaseModel):
-    data: DataPaths
-    graph: GraphConfig
-    model: ModelConfig
-
-
 class TrainingConfig(BaseModel):
     epochs: int
     batch_size: int
@@ -46,13 +36,6 @@ class TrainingConfig(BaseModel):
     pretrained: bool
     model_path: str
     save_path: str
-
-
-class Config(BaseModel):
-    data: DataPaths
-    graph: GraphConfig
-    model: ModelConfig
-    training: TrainingConfig
 
 
 class EvalConfig(BaseModel):
